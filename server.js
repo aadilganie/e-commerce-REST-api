@@ -5,7 +5,7 @@ const errorHandler = require("./middlewares/errorHandler");
 const connectDB = require("./config/db");
 
 const app = express();
-
+app.use(express.json());
 if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
 }

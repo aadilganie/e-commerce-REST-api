@@ -19,13 +19,11 @@ const ShopSchema = new mongoose.Schema({
   },
   phone: {
     type: String,
-    trim: true,
+    validate: function (v) {
+      return /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(v);
+    },
+    message: "Please provide a valid phone number",
     required: [true, "Phone number is required"],
-    match: [
-      /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
-      ["Please provide a valid phone number"],
-    ],
-    required: true,
   },
   email: {
     type: String,
