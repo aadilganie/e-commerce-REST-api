@@ -1,0 +1,40 @@
+[
+  {
+    "name": "shop 1",
+    "description": "shop 1's description",
+    "phone": "206-330-3341",
+    "email": "shop1@shop1.com",
+    "stars": 4.5,
+    "badges": ["Shop of the week"]
+  },
+  {
+    "name": "shop 2",
+    "description": "shop 2's description",
+    "phone": "206-330-3342",
+    "email": "shop2@shop2.com",
+    "stars": 4,
+    "badges": ["Shop of the week"]
+  },
+  {
+    "name": "shop 3",
+    "description": "shop 3's description",
+    "phone": "206-330-3343",
+    "email": "shop3@shop3.com",
+    "stars": 3.8
+  },
+  {
+    "name": "shop 4",
+    "description": "shop 4's description",
+    "phone": "206-330-3344",
+    "email": "shop4@shop4.com",
+    "stars": 4.8,
+    "badges": ["Shop of the week", "Shop of the month", "Shop of the year"]
+  },
+  {
+    "name": "shop 5",
+    "description": "shop 5's description",
+    "phone": "206-330-3345",
+    "email": "shop5@shop5.com",
+    "stars": 2.8
+  }
+]

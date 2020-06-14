@@ -20,7 +20,7 @@ const ShopSchema = new mongoose.Schema({
   phone: {
     type: String,
     trim: true,
-    required: true,
+    required: [true, "Phone number is required"],
     match: [
       /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
       ["Please provide a valid phone number"],
@@ -30,7 +30,7 @@ const ShopSchema = new mongoose.Schema({
   email: {
     type: String,
     trim: true,
-    required: true,
+    required: [true, "Email is required"],
     match: [
       /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/,
       "Please provide a valid email address",
@@ -41,6 +41,7 @@ const ShopSchema = new mongoose.Schema({
   photo: String,
   badges: {
     type: [String],
+    default: [],
     enum: ["Shop of the week", "Shop of the month", "Shop of the year"],
   },
   createdAt: {
