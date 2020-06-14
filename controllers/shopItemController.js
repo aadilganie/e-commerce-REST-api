@@ -4,7 +4,7 @@ const ShopItem = require("../model/ShopItem");
 const Shop = require("../model/Shop");
 
 // @desc    Get shop items
-// @route   /api/v1/shopitems
+// @route   GET /api/v1/shopitems
 // @route   /api/v1/shops/:shopId/shopitems
 // @access  Public
 exports.getShopItems = asyncHandler(async (req, res, next) => {
@@ -34,4 +34,21 @@ exports.getShopItems = asyncHandler(async (req, res, next) => {
   res
     .status(200)
     .json({ success: true, count: shopItems.length, data: shopItems });
+});
+
+// @desc    Add shop items
+// @route   POST /api/v1/shops/:shopId/shopitems
+// @access  Private
+exports.addShopItems = asyncHandler(async (req, res, next) => {
+  const shop = await Shop.findById(req.params.shopId);
+
+  if (!shop) {
+    return next(
+      new ErrorResponse(`No such shop with id ${req.params.shopId}`, 404)
+    );
+  }
+
+  req.body.shop = req.params.shopId;
+  const shopItem = await ShopItem.create(req.body);
+  res.status(200).json({ success: true, data: shopItem });
 });
