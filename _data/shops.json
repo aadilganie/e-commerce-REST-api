@@ -1,5 +1,6 @@
 [
   {
+    "_id": "5ee59cc1ac350f856d6d273b",
     "name": "shop 1",
     "description": "shop 1's description",
     "phone": "206-330-3341",
@@ -8,6 +9,7 @@
     "badges": ["Shop of the week"]
   },
   {
+    "_id": "5ee59cc1ac350f856d6d273c",
     "name": "shop 2",
     "description": "shop 2's description",
     "phone": "206-330-3342",
@@ -16,6 +18,7 @@
     "badges": ["Shop of the week"]
   },
   {
+    "_id": "5ee59cc1ac350f856d6d273d",
     "name": "shop 3",
     "description": "shop 3's description",
     "phone": "206-330-3343",
@@ -23,6 +26,7 @@
     "stars": 3.8
   },
   {
+    "_id": "5ee59cc1ac350f856d6d273e",
     "name": "shop 4",
     "description": "shop 4's description",
     "phone": "206-330-3344",
@@ -31,6 +35,7 @@
     "badges": ["Shop of the week", "Shop of the month", "Shop of the year"]
   },
   {
+    "_id": "5ee59cc1ac350f856d6d273f",
     "name": "shop 5",
     "description": "shop 5's description",
     "phone": "206-330-3345",
