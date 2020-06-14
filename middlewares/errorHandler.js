@@ -4,7 +4,7 @@ const errorHandler = (err, req, res, next) => {
   let error = { ...err };
   error.message = err.message;
 
-  console.error(error);
+  console.log(error);
 
   // Object id cast error
   if (error.kind === "ObjectId") {
@@ -29,7 +29,9 @@ const errorHandler = (err, req, res, next) => {
     );
   }
 
-  res.status(error.statusCode).json({ success: false, error: error.message });
+  res
+    .status(error.statusCode || 500)
+    .json({ success: false, error: error.message || "Server error" });
 };
 
 module.exports = errorHandler;

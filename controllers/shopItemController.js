@@ -52,3 +52,40 @@ exports.addShopItems = asyncHandler(async (req, res, next) => {
   const shopItem = await ShopItem.create(req.body);
   res.status(200).json({ success: true, data: shopItem });
 });
+
+// @desc    Update shop item
+// @route   POST /api/v1/shopitems/:id
+// @access  Private
+exports.updateShopItem = asyncHandler(async (req, res, next) => {
+  let shopItem = await ShopItem.findById(req.params.id);
+
+  if (!shopItem) {
+    return next(
+      new ErrorResponse(`No such shop item with id ${req.params.id}`, 404)
+    );
+  }
+
+  shopItem = await ShopItem.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  res.status(200).json({ success: true, data: shopItem });
+});
+
+// @desc    Delete shop item
+// @route   DELETE /api/v1/shopitems/:id
+// @access  Private
+exports.deleteShopItems = asyncHandler(async (req, res, next) => {
+  const shopItem = await ShopItem.findById(req.params.id);
+
+  if (!shopItem) {
+    return next(
+      new ErrorResponse(`No such shop item with id ${req.params.id}`, 404)
+    );
+  }
+
+  await shopItem.remove();
+
+  res.status(200).json({ success: true, data: shopItem });
+});
