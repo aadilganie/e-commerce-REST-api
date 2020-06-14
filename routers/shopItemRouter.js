@@ -5,10 +5,15 @@ const {
   updateShopItem,
   deleteShopItems,
 } = require("../controllers/shopItemController");
+const ShopItem = require("../model/ShopItem");
+const filterSortSelectPage = require("../middlewares/filterSortSelectPage");
 
 const router = express.Router({ mergeParams: true });
 
-router.route("/").get(getShopItems).post(addShopItems);
+router
+  .route("/")
+  .get(filterSortSelectPage(ShopItem, "shop"), getShopItems)
+  .post(addShopItems);
 
 router.route("/:id").put(updateShopItem).delete(deleteShopItems);
 

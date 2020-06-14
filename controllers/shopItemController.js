@@ -8,8 +8,6 @@ const Shop = require("../model/Shop");
 // @route   /api/v1/shops/:shopId/shopitems
 // @access  Public
 exports.getShopItems = asyncHandler(async (req, res, next) => {
-  let query;
-
   if (req.params.shopId) {
     const shop = await Shop.findById(req.params.shopId);
 
@@ -19,21 +17,13 @@ exports.getShopItems = asyncHandler(async (req, res, next) => {
       );
     }
 
-    query = ShopItem.find({ shop: req.params.shopId });
+    const shopItems = await ShopItem.find({ shop: req.params.shopId });
+    return res
+      .status(200)
+      .json({ success: true, count: shopItems.length, data: shopItems });
   } else {
-    query = ShopItem.find();
+    res.status(200).json(res.queryResults);
   }
-
-  query = query.populate({
-    path: "shop",
-    select: "name stars",
-  });
-
-  const shopItems = await query.exec();
-
-  res
-    .status(200)
-    .json({ success: true, count: shopItems.length, data: shopItems });
 });
 
 // @desc    Add shop items
