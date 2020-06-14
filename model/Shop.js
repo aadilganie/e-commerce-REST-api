@@ -55,6 +55,12 @@ const ShopSchema = new mongoose.Schema(
   }
 );
 
+ShopSchema.pre("remove", async function (next) {
+  console.log("ran");
+  await this.model("ShopItem").deleteMany({ shop: this._id });
+  next();
+});
+
 ShopSchema.virtual("shopitems", {
   ref: "ShopItem",
   localField: "_id",
@@ -63,7 +69,7 @@ ShopSchema.virtual("shopitems", {
 });
 
 ShopSchema.pre("save", function (next) {
-  this.slug = slugify(this.name);
+  this.slug = slugify(this.name, { lower: true });
   next();
 });
 

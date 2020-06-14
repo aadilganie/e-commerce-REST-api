@@ -13,7 +13,7 @@ exports.getShops = asyncHandler(async (req, res, next) => {
 // @route   GET /api/v1/shops/:id
 // @access  Public
 exports.getShopById = asyncHandler(async (req, res, next) => {
-  const shop = await Shop.findById(req.params.id);
+  const shop = await Shop.findById(req.params.id).populate("shopitems");
 
   if (!shop) {
     return next(
