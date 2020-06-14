@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Shop = require("../model/Shop");
 
 const ShopItemSchema = new mongoose.Schema({
   title: {
@@ -37,6 +38,30 @@ const ShopItemSchema = new mongoose.Schema({
     ref: "Shop",
     required: true,
   },
+});
+
+ShopItemSchema.statics.getAvgPrice = async function (shopId) {
+  const result = await this.aggregate([
+    { $match: { shop: shopId } },
+    { $group: { _id: "$shop", averagePrice: { $avg: "$price" } } },
+  ]);
+  console.log(result);
+  try {
+    await Shop.findByIdAndUpdate(shopId, {
+      averagePrice: parseInt(result[0].averagePrice * 10) / 10,
+    });
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
+ShopItemSchema.post("save", async function () {
+  await this.constructor.getAvgPrice(this.shop);
+});
+
+ShopItemSchema.post("remove", async function () {
+  console.log(this);
+  await this.constructor.getAvgPrice(this.shop);
 });
 
 module.exports = mongoose.model("ShopItem", ShopItemSchema);

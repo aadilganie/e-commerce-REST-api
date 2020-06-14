@@ -3,12 +3,14 @@ const express = require("express");
 const morgan = require("morgan");
 const errorHandler = require("./middlewares/errorHandler");
 const connectDB = require("./config/db");
+const fileUpload = require("express-fileupload");
 
 const app = express();
 app.use(express.json());
 if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
 }
+app.use(fileUpload({ limits: { fileSize: 5000000 } }));
 
 connectDB();
 

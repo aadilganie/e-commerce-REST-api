@@ -36,7 +36,7 @@ const ShopSchema = new mongoose.Schema(
       ],
     },
     stars: Number,
-    averageCost: Number,
+    averagePrice: Number,
     photo: String,
     badges: {
       type: [String],
@@ -55,12 +55,14 @@ const ShopSchema = new mongoose.Schema(
   }
 );
 
+// Cascade delete
 ShopSchema.pre("remove", async function (next) {
   console.log("ran");
   await this.model("ShopItem").deleteMany({ shop: this._id });
   next();
 });
 
+// Virtual fields
 ShopSchema.virtual("shopitems", {
   ref: "ShopItem",
   localField: "_id",
@@ -68,6 +70,7 @@ ShopSchema.virtual("shopitems", {
   justOne: false,
 });
 
+// Product slugs
 ShopSchema.pre("save", function (next) {
   this.slug = slugify(this.name, { lower: true });
   next();

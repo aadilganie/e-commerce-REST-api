@@ -5,6 +5,7 @@ const {
   addShop,
   updateShop,
   deleteShop,
+  uploadPhoto,
 } = require("../controllers/shopController");
 const filterSortSelectPage = require("../middlewares/filterSortSelectPage");
 const Shop = require("../model/Shop");
@@ -22,5 +23,7 @@ router
   .post(addShop);
 
 router.route("/:id").get(getShopById).put(updateShop).delete(deleteShop);
+
+router.route("/:id/photo").put(uploadPhoto);
 
 module.exports = router;
