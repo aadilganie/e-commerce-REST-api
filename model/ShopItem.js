@@ -27,6 +27,11 @@ const ShopItemSchema = new mongoose.Schema({
     message: "quantity must be of integer",
     required: [true, "Quantity is required"],
   },
+  createdAt: {
+    type: Date,
+    required: true,
+    default: Date.now,
+  },
   shop: {
     type: mongoose.Types.ObjectId,
     ref: "Shop",
