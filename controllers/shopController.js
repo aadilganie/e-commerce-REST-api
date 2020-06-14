@@ -56,6 +56,11 @@ exports.getShops = asyncHandler(async (req, res, next) => {
     };
   }
 
+  query = query.populate({
+    path: "shopitems",
+    select: "title price",
+  });
+
   const shops = await query.exec();
 
   res
