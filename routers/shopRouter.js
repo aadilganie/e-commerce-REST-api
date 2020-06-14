@@ -7,7 +7,12 @@ const {
   deleteShop,
 } = require("../controllers/shopController");
 
+const shopItemRouter = require("../routers/shopItemRouter");
+
 const router = express.Router();
+
+// Re-route
+router.use("/:shopId/shopitems", shopItemRouter);
 
 router.route("/").get(getShops).post(addShop);
 
