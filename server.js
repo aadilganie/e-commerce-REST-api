@@ -5,9 +5,11 @@ const errorHandler = require("./middlewares/errorHandler");
 const connectDB = require("./config/db");
 const fileUpload = require("express-fileupload");
 const path = require("path");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
 }
