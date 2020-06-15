@@ -7,7 +7,7 @@ const User = require("../model/User");
 // @access  Public
 exports.registerUser = asyncHandler(async (req, res, next) => {
   const user = await User.create(req.body);
-  responseWithToken(user, 200, res);
+  respTokenWithCookie(user, 200, res);
 });
 
 // @desc    Login user
@@ -30,11 +30,18 @@ exports.loginUser = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse(`Invalid credential`, 400));
   }
 
-  responseWithToken(user, 200, res);
+  respTokenWithCookie(user, 200, res);
+});
+
+// @desc    Load current logged in user
+// @route   POST /api/v1/auth/loadMe
+// @access  Private
+exports.loadMe = asyncHandler(async (req, res, next) => {
+  res.status(200).json({ success: true, data: req.user });
 });
 
 // Send back token in cookie
-const responseWithToken = (user, statusCode, res) => {
+const respTokenWithCookie = (user, statusCode, res) => {
   const token = user.getJwtToken(user.id);
 
   const cookieOptions = {
