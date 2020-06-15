@@ -48,6 +48,11 @@ const ShopSchema = new mongoose.Schema(
       required: true,
       default: Date.now,
     },
+    user: {
+      type: mongoose.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   {
     toObject: { virtuals: true },

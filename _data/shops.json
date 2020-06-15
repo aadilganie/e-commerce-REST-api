@@ -6,7 +6,8 @@
     "phone": "206-330-3341",
     "email": "shop1@shop1.com",
     "stars": 4.5,
-    "badges": ["Shop of the week"]
+    "badges": ["Shop of the week"],
+    "user": "5ee711f2b64cfcd631a0e693"
   },
   {
     "_id": "5ee59cc1ac350f856d6d273c",
@@ -15,7 +16,8 @@
     "phone": "206-330-3342",
     "email": "shop2@shop2.com",
     "stars": 4,
-    "badges": ["Shop of the week"]
+    "badges": ["Shop of the week"],
+    "user": "5ee711f2b64cfcd631a0e694"
   },
   {
     "_id": "5ee59cc1ac350f856d6d273d",
@@ -23,7 +25,8 @@
     "description": "shop 3's description",
     "phone": "206-330-3343",
     "email": "shop3@shop3.com",
-    "stars": 3.8
+    "stars": 3.8,
+    "user": "5ee711f2b64cfcd631a0e695"
   },
   {
     "_id": "5ee59cc1ac350f856d6d273e",
@@ -32,7 +35,8 @@
     "phone": "206-330-3344",
     "email": "shop4@shop4.com",
     "stars": 4.8,
-    "badges": ["Shop of the week", "Shop of the month", "Shop of the year"]
+    "badges": ["Shop of the week", "Shop of the month", "Shop of the year"],
+    "user": "5ee711f2b64cfcd631a0e696"
   },
   {
     "_id": "5ee59cc1ac350f856d6d273f",
@@ -40,6 +44,7 @@
     "description": "shop 5's description",
     "phone": "206-330-3345",
     "email": "shop5@shop5.com",
-    "stars": 2.8
+    "stars": 2.8,
+    "user": "5ee711f2b64cfcd631a0e697"
   }
 ]

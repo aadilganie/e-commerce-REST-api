@@ -5,7 +5,8 @@
     "category": "electronics",
     "price": 25,
     "qtySold": 12,
-    "shop": "5ee59cc1ac350f856d6d273b"
+    "shop": "5ee59cc1ac350f856d6d273b",
+    "user": "5ee711f2b64cfcd631a0e693"
   },
   {
     "title": "shop item 2",
@@ -13,7 +14,8 @@
     "category": "electronics",
     "price": 12,
     "qtySold": 15,
-    "shop": "5ee59cc1ac350f856d6d273b"
+    "shop": "5ee59cc1ac350f856d6d273b",
+    "user": "5ee711f2b64cfcd631a0e693"
   },
   {
     "title": "shop item 3",
@@ -21,7 +23,8 @@
     "category": "electronics",
     "price": 34,
     "qtySold": 13,
-    "shop": "5ee59cc1ac350f856d6d273b"
+    "shop": "5ee59cc1ac350f856d6d273b",
+    "user": "5ee711f2b64cfcd631a0e694"
   },
   {
     "title": "shop item 4",
@@ -29,7 +32,8 @@
     "category": "electronics",
     "price": 3,
     "qtySold": 3,
-    "shop": "5ee59cc1ac350f856d6d273c"
+    "shop": "5ee59cc1ac350f856d6d273c",
+    "user": "5ee711f2b64cfcd631a0e695"
   },
   {
     "title": "shop item 5",
@@ -37,7 +41,8 @@
     "category": "electronics",
     "price": 123,
     "qtySold": 3,
-    "shop": "5ee59cc1ac350f856d6d273d"
+    "shop": "5ee59cc1ac350f856d6d273d",
+    "user": "5ee711f2b64cfcd631a0e696"
   },
   {
     "title": "shop item 6",
@@ -45,7 +50,8 @@
     "category": "electronics",
     "price": 3,
     "qtySold": 333,
-    "shop": "5ee59cc1ac350f856d6d273d"
+    "shop": "5ee59cc1ac350f856d6d273d",
+    "user": "5ee711f2b64cfcd631a0e696"
   },
   {
     "title": "shop item 7",
@@ -53,6 +59,7 @@
     "category": "electronics",
     "price": 44,
     "qtySold": 3,
-    "shop": "5ee59cc1ac350f856d6d273f"
+    "shop": "5ee59cc1ac350f856d6d273f",
+    "user": "5ee711f2b64cfcd631a0e697"
   }
 ]

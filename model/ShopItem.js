@@ -38,6 +38,11 @@ const ShopItemSchema = new mongoose.Schema({
     ref: "Shop",
     required: true,
   },
+  user: {
+    type: mongoose.Types.ObjectId,
+    ref: "ShopItem",
+    required: true,
+  },
 });
 
 ShopItemSchema.statics.getAvgPrice = async function (shopId) {
