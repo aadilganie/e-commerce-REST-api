@@ -8,7 +8,10 @@ const errorHandler = (err, req, res, next) => {
 
   // Object id cast error
   if (error.kind === "ObjectId") {
-    error = new ErrorResponse(`No such shop with id of ${error.value}`, 404);
+    error = new ErrorResponse(
+      `No such resource with id of ${error.value}`,
+      404
+    );
   }
 
   // Duplicate key error

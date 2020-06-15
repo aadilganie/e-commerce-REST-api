@@ -132,7 +132,7 @@ exports.updateInfo = asyncHandler(async (req, res, next) => {
     runValidators: true,
   });
 
-  res.status(200).json({ success: true, data: user });
+  respTokenWithCookie(user, 200, res);
 });
 
 // @desc    Update logged in user password
@@ -146,7 +146,8 @@ exports.updatePassword = asyncHandler(async (req, res, next) => {
   let user = await User.findById(req.user.id).select("+password");
   user.password = req.body.password;
   user = await user.save();
-  res.status(200).json({ success: true, data: user });
+
+  respTokenWithCookie(user, 200, res);
 });
 
 // Send back token in cookie

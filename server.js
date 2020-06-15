@@ -20,6 +20,7 @@ connectDB();
 app.use("/api/v1/shops", require("./routers/shopRouter"));
 app.use("/api/v1/shopitems", require("./routers/shopItemRouter"));
 app.use("/api/v1/auth", require("./routers/authRouter"));
+app.use("/api/v1/users", require("./routers/userRouter"));
 app.use(errorHandler);
 
 // http://localhost:5000/uploads/photo_5ee59cc1ac350f856d6d273f.jpeg
