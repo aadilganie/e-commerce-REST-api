@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
+const Shop = require("./Shop");
 
 const UserSchema = new mongoose.Schema(
   {
@@ -49,11 +50,13 @@ UserSchema.virtual("shops", {
   onlyOne: false,
 });
 
-UserSchema.virtual("shopItems", {
-  ref: "ShopItem",
-  localField: "_id",
-  foreignField: "user",
-  onlyOne: false,
+// Delete seller cascade delete shop
+UserSchema.pre("remove", async function (next) {
+  if (this.role === "seller") {
+    const shop = await Shop.findOne({ user: this._id });
+    await shop.remove();
+  }
+  next();
 });
 
 // Generate reset token

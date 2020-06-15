@@ -1,7 +1,6 @@
 const asyncHandler = require("../middlewares/asyncHander.js");
 const ErrorResponse = require("../utils/ErrorResponse.js");
 const Review = require("../model/Review");
-const ShopItems = require("../model/ShopItem");
 const ShopItem = require("../model/ShopItem");
 
 // @desc    Get reviews

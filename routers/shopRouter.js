@@ -20,7 +20,7 @@ router.use("/:shopId/shopitems", shopItemRouter);
 
 router
   .route("/")
-  .get(filterSortSelectPage(Shop, "shopitems"), getShops)
+  .get(filterSortSelectPage(Shop, "shopitems user"), getShops)
   .post(protect, authorize("seller", "admin"), addShop);
 
 router

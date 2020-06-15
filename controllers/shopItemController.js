@@ -38,7 +38,7 @@ exports.addShopItems = asyncHandler(async (req, res, next) => {
     );
   }
 
-  if (shop.user.toString !== req.user.id) {
+  if (shop.user.toString() !== req.user.id) {
     return next(
       new ErrorResponse(
         `User ${req.user.id} is not authorized to add items to shop ${shop._id}`,
@@ -59,15 +59,17 @@ exports.updateShopItem = asyncHandler(async (req, res, next) => {
   let shopItem = await ShopItem.findById(req.params.id);
 
   console.log(req.user.id);
-  console.log(shopItem.user.toString());
 
+  // Check if shopItem exists
   if (!shopItem) {
     return next(
       new ErrorResponse(`No such shop item with id ${req.params.id}`, 404)
     );
   }
 
-  if (shopItem.user.toString() !== req.user.id) {
+  // Check if user seller own this item
+  const shop = await Shop.findById(shopItem.shop.toString());
+  if (shop.user.toString() !== req.user.id) {
     return next(
       new ErrorResponse(
         `User ${req.user.id} is not authorized to update item ${shopItem._id}`,
@@ -75,9 +77,6 @@ exports.updateShopItem = asyncHandler(async (req, res, next) => {
       )
     );
   }
-
-  console.log(req.user.id);
-  console.log(shopItem.user.toString());
 
   shopItem = await ShopItem.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
@@ -93,16 +92,19 @@ exports.updateShopItem = asyncHandler(async (req, res, next) => {
 exports.deleteShopItems = asyncHandler(async (req, res, next) => {
   const shopItem = await ShopItem.findById(req.params.id);
 
+  // Check if shopItem exists
   if (!shopItem) {
     return next(
       new ErrorResponse(`No such shop item with id ${req.params.id}`, 404)
     );
   }
 
-  if (shopItem.user.toString() !== req.user.id) {
+  // Check if user seller own this item
+  const shop = await Shop.findById(shopItem.shop.toString());
+  if (shop.user.toString() !== req.user.id) {
     return next(
       new ErrorResponse(
-        `User ${req.user.id} is not authorized to delete item ${shopItem._id}`,
+        `User ${req.user.id} is not authorized to update item ${shopItem._id}`,
         401
       )
     );
@@ -110,5 +112,5 @@ exports.deleteShopItems = asyncHandler(async (req, res, next) => {
 
   await shopItem.remove();
 
-  res.status(200).json({ success: true, data: shopItem });
+  res.status(200).json({ success: true, data: {} });
 });

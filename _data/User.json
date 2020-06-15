@@ -1,37 +1,72 @@
 [
   {
+    "_id": "5ee711f2b64cfcd631a0e683",
+    "name": "test buyer 1",
+    "email": "testbuyeremail1@email.com",
+    "role": "seller",
+    "password": "123456"
+  },
+  {
+    "_id": "5ee711f2b64cfcd631a0e684",
+    "name": "test buyer 2",
+    "email": "testbuyeremail2@email.com",
+    "role": "seller",
+    "password": "123456"
+  },
+  {
+    "_id": "5ee711f2b64cfcd631a0e685",
+    "name": "test buyer 3",
+    "email": "testbuyeremail3@email.com",
+    "role": "seller",
+    "password": "123456"
+  },
+  {
+    "_id": "5ee711f2b64cfcd631a0e686",
+    "name": "test buyer 4",
+    "email": "testbuyeremail4@email.com",
+    "role": "seller",
+    "password": "123456"
+  },
+  {
+    "_id": "5ee711f2b64cfcd631a0e687",
+    "name": "test buyer 5",
+    "email": "testubuyermail5@email.com",
+    "role": "seller",
+    "password": "123456"
+  },
+  {
     "_id": "5ee711f2b64cfcd631a0e693",
-    "name": "test name 1",
-    "email": "testuseremail1@email.com",
-    "role": "buyer",
+    "name": "test seller name 1",
+    "email": "testselleremail1@email.com",
+    "role": "seller",
     "password": "123456"
   },
   {
     "_id": "5ee711f2b64cfcd631a0e694",
-    "name": "test name 2",
-    "email": "testuseremail2@email.com",
-    "role": "buyer",
+    "name": "test seller name 2",
+    "email": "testselleremail2@email.com",
+    "role": "seller",
     "password": "123456"
   },
   {
     "_id": "5ee711f2b64cfcd631a0e695",
-    "name": "test name 3",
-    "email": "testuseremail3@email.com",
-    "role": "buyer",
+    "name": "test seller name 3",
+    "email": "testselleremail3@email.com",
+    "role": "seller",
     "password": "123456"
   },
   {
     "_id": "5ee711f2b64cfcd631a0e696",
-    "name": "test name 4",
-    "email": "testuseremail4@email.com",
-    "role": "buyer",
+    "name": "test seller name 4",
+    "email": "testselleremail4@email.com",
+    "role": "seller",
     "password": "123456"
   },
   {
     "_id": "5ee711f2b64cfcd631a0e697",
-    "name": "test name 5",
-    "email": "testuseremail5@email.com",
-    "role": "buyer",
+    "name": "test seller name 5",
+    "email": "testselleremail5@email.com",
+    "role": "seller",
     "password": "123456"
   }
 ]

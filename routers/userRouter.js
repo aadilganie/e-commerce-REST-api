@@ -18,7 +18,7 @@ router.use(authorize("admin"));
 
 router
   .route("/")
-  .get(filterSortSelectPage(User, "shops shopItems"), getUsers)
+  .get(filterSortSelectPage(User, "shops"), getUsers)
   .post(addUser);
 router.route("/:id").get(getUser).put(updateUser).delete(deleteUser);
 
