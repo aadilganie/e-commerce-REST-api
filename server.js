@@ -7,6 +7,13 @@ const fileUpload = require("express-fileupload");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 
+const mongoSanitize = require("express-mongo-sanitize");
+const helmet = require("helmet");
+const xss = require("xss-clean");
+const rateLimit = require("express-rate-limit");
+const hpp = require("hpp");
+const cors = require("cors");
+
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
@@ -14,6 +21,22 @@ if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
 }
 app.use(fileUpload({ limits: { fileSize: 5000000 } }));
+// Sanitize request
+app.use(mongoSanitize());
+// Set security headers
+app.use(helmet());
+// Prevent xss attacks
+app.use(xss());
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 10 * 60 * 1000, // 10 minuates
+  max: 100, // 100 requests
+});
+app.use(limiter);
+// Prevent http param polution
+app.use(hpp());
+// Enable cors for public api ***
+app.use(cors());
 
 connectDB();
 

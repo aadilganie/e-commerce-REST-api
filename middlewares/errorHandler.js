@@ -4,7 +4,7 @@ const errorHandler = (err, req, res, next) => {
   let error = { ...err };
   error.message = err.message;
 
-  console.log(error);
+  console.error(error);
 
   // Object id cast error
   if (error.kind === "ObjectId") {

@@ -51,7 +51,7 @@ ShopItemSchema.statics.getAvgPrice = async function (shopId) {
       averagePrice: parseInt(result[0].averagePrice * 10) / 10,
     });
   } catch (error) {
-    console.error(error.message);
+    console.error(error);
   }
 };
 
