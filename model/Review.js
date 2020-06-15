@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const ShopItem = require("./ShopItem");
 
 const ReviewSchema = new mongoose.Schema({
   title: {
@@ -31,6 +32,32 @@ const ReviewSchema = new mongoose.Schema({
     ref: "ShopItem",
     required: true,
   },
+});
+
+// Calcalute average stars and update field in ShopItem model instance
+ReviewSchema.statics.getAvgStar = async function (shopItemId) {
+  const result = await this.aggregate([
+    { $match: { shopItem: shopItemId } },
+    { $group: { _id: "$shopItem", averageItemStar: { $avg: "$star" } } },
+  ]);
+
+  try {
+    const shopItem = await ShopItem.findById(shopItemId);
+    shopItem.averageItemStar = result[0].averageItemStar;
+    await shopItem.save();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+ReviewSchema.post("save", async function (doc, next) {
+  await this.model("Review").getAvgStar(this.shopItem);
+  next();
+});
+
+ReviewSchema.post("remove", async function (doc, next) {
+  await this.model("Review").getAvgStar(this.shopItem);
+  next();
 });
 
 // Add index so one buyer can only post one review per item
