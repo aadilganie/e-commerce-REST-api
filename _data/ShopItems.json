@@ -1,5 +1,6 @@
 [
   {
+    "_id": "5ee7f87040882708968287ea",
     "title": "shop item 1",
     "description": "description for shop item 1",
     "category": "electronics",
@@ -8,6 +9,7 @@
     "shop": "5ee59cc1ac350f856d6d273b"
   },
   {
+    "_id": "5ee7f87040882708968287eb",
     "title": "shop item 2",
     "description": "description for shop item 2",
     "category": "electronics",
@@ -16,6 +18,7 @@
     "shop": "5ee59cc1ac350f856d6d273b"
   },
   {
+    "_id": "5ee7f87040882708968287ec",
     "title": "shop item 3",
     "description": "description for shop item 3",
     "category": "electronics",
@@ -24,6 +27,7 @@
     "shop": "5ee59cc1ac350f856d6d273b"
   },
   {
+    "_id": "5ee7f87040882708968287ed",
     "title": "shop item 4",
     "description": "description for shop item 4",
     "category": "electronics",
@@ -32,6 +36,7 @@
     "shop": "5ee59cc1ac350f856d6d273c"
   },
   {
+    "_id": "5ee7f87040882708968287ee",
     "title": "shop item 5",
     "description": "description for shop item 5",
     "category": "electronics",
@@ -40,6 +45,7 @@
     "shop": "5ee59cc1ac350f856d6d273d"
   },
   {
+    "_id": "5ee7f87040882708968287ef",
     "title": "shop item 6",
     "description": "description for shop item 6",
     "category": "electronics",
@@ -48,6 +54,7 @@
     "shop": "5ee59cc1ac350f856d6d273d"
   },
   {
+    "_id": "5ee7f87040882708968287e9",
     "title": "shop item 7",
     "description": "description for shop item 7",
     "category": "electronics",

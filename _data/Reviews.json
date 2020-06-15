@@ -3,7 +3,49 @@
     "title": "test review 1",
     "text": "text field for test review 1",
     "star": 4.3,
-    "user": "5ee711f2b64cfcd631a0e693",
-    "shopItem": ""
+    "user": "5ee711f2b64cfcd631a0e683",
+    "shopItem": "5ee7f87040882708968287ea"
+  },
+  {
+    "title": "test review 6",
+    "text": "text field for test review 1",
+    "star": 3.8,
+    "user": "5ee711f2b64cfcd631a0e683",
+    "shopItem": "5ee7f87040882708968287eb"
+  },
+  {
+    "title": "test review 2",
+    "text": "text field for test review 2",
+    "star": 1.8,
+    "user": "5ee711f2b64cfcd631a0e684",
+    "shopItem": "5ee7f87040882708968287eb"
+  },
+  {
+    "title": "test review 7",
+    "text": "text field for test review 2",
+    "star": 4,
+    "user": "5ee711f2b64cfcd631a0e684",
+    "shopItem": "5ee7f87040882708968287ec"
+  },
+  {
+    "title": "test review 3",
+    "text": "text field for test review 3",
+    "star": 3.7,
+    "user": "5ee711f2b64cfcd631a0e685",
+    "shopItem": "5ee7f87040882708968287ed"
+  },
+  {
+    "title": "test review 4",
+    "text": "text field for test review 4",
+    "star": 2,
+    "user": "5ee711f2b64cfcd631a0e686",
+    "shopItem": "5ee7f87040882708968287ed"
+  },
+  {
+    "title": "test review 5",
+    "text": "text field for test review 5",
+    "star": 2.5,
+    "user": "5ee711f2b64cfcd631a0e687",
+    "shopItem": "5ee7f87040882708968287ee"
   }
 ]
