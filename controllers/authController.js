@@ -1,6 +1,7 @@
 const asyncHandler = require("../middlewares/asyncHander");
 const ErrorResponse = require("../utils/ErrorResponse");
 const User = require("../model/User");
+const sendEmail = require("../utils/sendEmail");
 
 // @desc    Register user
 // @route   POST /api/v1/auth/register
@@ -57,3 +58,33 @@ const respTokenWithCookie = (user, statusCode, res) => {
     .cookie("TOKEN", token, cookieOptions)
     .json({ success: true, token });
 };
+
+// @desc    Forgot password
+// @route   POST api/v1/auth/forgotpassword
+// @access  Public
+exports.forgotPassword = asyncHandler(async (req, res, next) => {
+  const { email } = req.body;
+  if (!email) {
+    return next(new ErrorResponse(`Email is required.`, 400));
+  }
+
+  const user = await User.findOne({ email });
+  if (!user) {
+    return next(new ErrorResponse(`No user with email ${email}`, 404));
+  }
+
+  // Send email
+  await sendEmail(
+    `"Admin" <no-reply@ecommerce.com>`,
+    `${email}`,
+    `Password reset token`,
+    `You have requested for a password reset, please make a PUT request with your oldPassword and newPassword to ${
+      req.protocol
+    }://${req.get("host")}/api/auth/passwordreset/${user._id}.`
+  );
+
+  // Generate a reset token
+  const resetToken = user.genResetToken();
+
+  res.status(200).json({ success: true, resetToken });
+});
