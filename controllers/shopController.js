@@ -29,7 +29,12 @@ exports.getShopById = asyncHandler(async (req, res, next) => {
 // @route   POST /api/v1/shops
 // @access  Private
 exports.addShop = asyncHandler(async (req, res, next) => {
-  const shop = await Shop.create(req.body);
+  let shop = await Shop.findOne({ user: req.user.id });
+  if (shop) {
+    return next(new ErrorResponse(`A user can have at most one shop`, 400));
+  }
+  req.body.user = req.user.id;
+  shop = await Shop.create(req.body);
   res.status(200).json({ success: true, data: shop });
 });
 
