@@ -25,7 +25,6 @@ exports.loginUser = asyncHandler(async (req, res, next) => {
   if (!user) {
     return next(new ErrorResponse(`No user with email ${email}`, 400));
   }
-  console.log(user);
 
   const isMatch = await user.verifyPassword(password);
   if (!isMatch) {
@@ -41,24 +40,6 @@ exports.loginUser = asyncHandler(async (req, res, next) => {
 exports.loadMe = asyncHandler(async (req, res, next) => {
   res.status(200).json({ success: true, data: req.user });
 });
-
-// Send back token in cookie
-const respTokenWithCookie = (user, statusCode, res) => {
-  const token = user.getJwtToken(user.id);
-
-  const cookieOptions = {
-    expires: new Date(
-      Date.now() + process.env.COOKIE_EXP * 24 * 60 * 60 * 1000
-    ),
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-  };
-
-  res
-    .status(statusCode)
-    .cookie("TOKEN", token, cookieOptions)
-    .json({ success: true, token });
-};
 
 // @desc    Forgot password
 // @route   POST api/v1/auth/forgotpassword
@@ -141,3 +122,47 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
 
   respTokenWithCookie(user, 200, res);
 });
+
+// @desc    Update logged in user info (email, name)
+// @route   PUT apu/v1/auth/updateinfo
+// @access  Private
+exports.updateInfo = asyncHandler(async (req, res, next) => {
+  const user = await User.findByIdAndUpdate(req.user.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  res.status(200).json({ success: true, data: user });
+});
+
+// @desc    Update logged in user password
+// @route   PUT apu/v1/auth/updatepassword
+// @access  Private
+exports.updatePassword = asyncHandler(async (req, res, next) => {
+  if (!req.body.password) {
+    return next(new ErrorResponse(`Password is required`, 400));
+  }
+
+  let user = await User.findById(req.user.id).select("+password");
+  user.password = req.body.password;
+  user = await user.save();
+  res.status(200).json({ success: true, data: user });
+});
+
+// Send back token in cookie
+const respTokenWithCookie = (user, statusCode, res) => {
+  const token = user.getJwtToken(user.id);
+
+  const cookieOptions = {
+    expires: new Date(
+      Date.now() + process.env.COOKIE_EXP * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+  };
+
+  res
+    .status(statusCode)
+    .cookie("TOKEN", token, cookieOptions)
+    .json({ success: true, token });
+};
