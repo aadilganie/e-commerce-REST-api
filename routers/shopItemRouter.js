@@ -7,18 +7,18 @@ const {
 } = require("../controllers/shopItemController");
 const ShopItem = require("../model/ShopItem");
 const filterSortSelectPage = require("../middlewares/filterSortSelectPage");
-const { protect } = require("../middlewares/auth");
+const { protect, authorize } = require("../middlewares/auth");
 
 const router = express.Router({ mergeParams: true });
 
 router
   .route("/")
   .get(filterSortSelectPage(ShopItem, "shop"), getShopItems)
-  .post(protect, addShopItems);
+  .post(protect, authorize("seller", "admin"), addShopItems);
 
 router
   .route("/:id")
-  .put(protect, updateShopItem)
-  .delete(protect, deleteShopItems);
+  .put(protect, authorize("seller", "admin"), updateShopItem)
+  .delete(protect, authorize("seller", "admin"), deleteShopItems);
 
 module.exports = router;

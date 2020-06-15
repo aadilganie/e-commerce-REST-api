@@ -3,6 +3,7 @@ const User = require("../model/User");
 const ErrorResponse = require("../utils/ErrorResponse");
 const asyncHandler = require("./asyncHander");
 
+// Make access to routes private
 exports.protect = asyncHandler(async (req, res, next) => {
   let token = req.headers.authorization;
 
@@ -22,3 +23,11 @@ exports.protect = asyncHandler(async (req, res, next) => {
     next(new ErrorResponse(`Not authorized to access this route`, 400));
   }
 });
+
+// Grants access to only certain roles
+exports.authorize = (...roles) => (req, res, next) => {
+  if (!roles.includes(req.user.role)) {
+    return next(new ErrorResponse(`Not authorized to access this route`, 400));
+  }
+  next();
+};
