@@ -8,6 +8,7 @@ const {
   uploadPhoto,
 } = require("../controllers/shopController");
 const filterSortSelectPage = require("../middlewares/filterSortSelectPage");
+const { protect } = require("../middlewares/auth");
 const Shop = require("../model/Shop");
 
 const shopItemRouter = require("../routers/shopItemRouter");
@@ -20,10 +21,14 @@ router.use("/:shopId/shopitems", shopItemRouter);
 router
   .route("/")
   .get(filterSortSelectPage(Shop, "shopitems"), getShops)
-  .post(addShop);
+  .post(protect, addShop);
 
-router.route("/:id").get(getShopById).put(updateShop).delete(deleteShop);
+router
+  .route("/:id")
+  .get(getShopById)
+  .put(protect, updateShop)
+  .delete(protect, deleteShop);
 
-router.route("/:id/photo").put(uploadPhoto);
+router.route("/:id/photo").put(protect, uploadPhoto);
 
 module.exports = router;

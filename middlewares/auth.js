@@ -14,7 +14,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
   }
 
   try {
-    // Attach user found user to req.body
+    // Attach found user to req.body
     const { data: userId } = jwt.verify(token, process.env.JWT_SECRET);
     req.user = await User.findById(userId);
     next();
