@@ -12,7 +12,7 @@ const ReviewSchema = new mongoose.Schema({
     minlength: [25, "Text must be at least 25 characters"],
   },
   star: {
-    type: number,
+    type: Number,
     min: [0, "Star ranges from 0 - 5"],
     max: [5, "Star ranges from 0 - 5"],
     required: [true, "Star is requried"],
@@ -32,5 +32,8 @@ const ReviewSchema = new mongoose.Schema({
     required: true,
   },
 });
+
+// Add index so one buyer can only post one review per item
+ReviewSchema.index({ user: 1, shopItem: 1 }, { unique: true });
 
 module.exports = mongoose.model("Review", ReviewSchema);

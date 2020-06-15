@@ -11,6 +11,9 @@ const { protect, authorize } = require("../middlewares/auth");
 
 const router = express.Router({ mergeParams: true });
 
+const reviewRouter = require("./reviewRouter");
+router.use("/:itemId/reviews", reviewRouter);
+
 router
   .route("/")
   .get(filterSortSelectPage(ShopItem, "shop"), getShopItems)
