@@ -16,7 +16,10 @@ const {
 router.use(protect);
 router.use(authorize("admin"));
 
-router.route("/").get(filterSortSelectPage(User), getUsers).post(addUser);
+router
+  .route("/")
+  .get(filterSortSelectPage(User, "shops shopItems"), getUsers)
+  .post(addUser);
 router.route("/:id").get(getUser).put(updateUser).delete(deleteUser);
 
 module.exports = router;

@@ -20,6 +20,7 @@ const ShopItemSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  averageItemStar: Number,
   qtySold: {
     type: Number,
     validate: function (v) {
@@ -50,7 +51,6 @@ ShopItemSchema.statics.getAvgPrice = async function (shopId) {
     { $match: { shop: shopId } },
     { $group: { _id: "$shop", averagePrice: { $avg: "$price" } } },
   ]);
-  console.log(result);
   try {
     await Shop.findByIdAndUpdate(shopId, {
       averagePrice: parseInt(result[0].averagePrice * 10) / 10,
@@ -65,7 +65,6 @@ ShopItemSchema.post("save", async function () {
 });
 
 ShopItemSchema.post("remove", async function () {
-  console.log(this);
   await this.constructor.getAvgPrice(this.shop);
 });
 
