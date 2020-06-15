@@ -21,22 +21,17 @@ if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
 }
 app.use(fileUpload({ limits: { fileSize: 5000000 } }));
-// Sanitize request
-app.use(mongoSanitize());
-// Set security headers
-app.use(helmet());
-// Prevent xss attacks
-app.use(xss());
+app.use(mongoSanitize()); // Sanitize request
+app.use(helmet()); // Set security headers
+app.use(xss()); // Prevent xss attacks
 // Rate limiting
 const limiter = rateLimit({
   windowMs: 10 * 60 * 1000, // 10 minuates
   max: 100, // 100 requests
 });
 app.use(limiter);
-// Prevent http param polution
-app.use(hpp());
-// Enable cors for public api ***
-app.use(cors());
+app.use(hpp()); // Prevent http param polution
+app.use(cors()); // Enable cors
 
 connectDB();
 

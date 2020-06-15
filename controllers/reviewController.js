@@ -4,8 +4,8 @@ const Review = require("../model/Review");
 const ShopItem = require("../model/ShopItem");
 
 // @desc    Get reviews
-// @route   GET api/v1/reviews
-// @route   GET api/v1/shopitems/:itemId/reviews
+// @route   GET /api/v1/reviews
+// @route   GET /api/v1/shopitems/:itemId/reviews
 // @access  Public
 exports.getReviews = asyncHandler(async (req, res, next) => {
   // Send back reviews of a given shopItem
@@ -20,7 +20,7 @@ exports.getReviews = asyncHandler(async (req, res, next) => {
 });
 
 // @desc    Get a review
-// @route   GET api/v1/reviews/:id
+// @route   GET /api/v1/reviews/:id
 // @access  Public
 exports.getReview = asyncHandler(async (req, res, next) => {
   const review = await Review.findById(req.params.id);
@@ -36,7 +36,7 @@ exports.getReview = asyncHandler(async (req, res, next) => {
 });
 
 // @desc    Add a review
-// @route   POST api/v1/shopitems/:itemId/reviews
+// @route   POST /api/v1/shopitems/:itemId/reviews
 // @access  Private - role: buyer only
 exports.addReview = asyncHandler(async (req, res, next) => {
   const shopItem = await ShopItem.findById(req.params.itemId);
@@ -57,8 +57,8 @@ exports.addReview = asyncHandler(async (req, res, next) => {
 });
 
 // @desc    Get reviews
-// @route   GET api/v1/reviews
-// @route   GET api/v1/shopitems/:itemId/reviews
+// @route   GET /api/v1/reviews
+// @route   GET /api/v1/shopitems/:itemId/reviews
 // @access  Public
 exports.getReviews = asyncHandler(async (req, res, next) => {
   // Send back reviews of a given shopItem
@@ -73,7 +73,7 @@ exports.getReviews = asyncHandler(async (req, res, next) => {
 });
 
 // @desc    Update a review
-// @route   PUT api/v1/reviews/:id
+// @route   PUT /api/v1/reviews/:id
 // @access  Private
 exports.updateReview = asyncHandler(async (req, res, next) => {
   let review = await Review.findById(req.params.id);
@@ -100,7 +100,7 @@ exports.updateReview = asyncHandler(async (req, res, next) => {
 });
 
 // @desc    Delete a review
-// @route   DELETE api/v1/reviews/:id
+// @route   DELETE /api/v1/reviews/:id
 // @access  Private
 exports.deleteReview = asyncHandler(async (req, res, next) => {
   const review = await Review.findById(req.params.id);

@@ -5,7 +5,7 @@ const Shop = require("../model/Shop");
 
 // @desc    Get shop items
 // @route   GET /api/v1/shopitems
-// @route   /api/v1/shops/:shopId/shopitems
+// @route   GET /api/v1/shops/:shopId/shopitems
 // @access  Public
 exports.getShopItems = asyncHandler(async (req, res, next) => {
   if (req.params.shopId) {

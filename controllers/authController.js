@@ -35,7 +35,7 @@ exports.loginUser = asyncHandler(async (req, res, next) => {
 });
 
 // @desc    Logout user
-// @route   GET /api/v1/auth/logout
+// @route   GET api/v1/auth/logout
 // @access  Public
 exports.logout = asyncHandler(async (req, res, next) => {
   res
@@ -55,7 +55,7 @@ exports.loadMe = asyncHandler(async (req, res, next) => {
 });
 
 // @desc    Forgot password
-// @route   POST api/v1/auth/forgotpassword
+// @route   POST /api/v1/auth/forgotpassword
 // @access  Public
 exports.forgotPassword = asyncHandler(async (req, res, next) => {
   const { email } = req.body;
@@ -86,7 +86,7 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
 });
 
 // @desc    Reset password
-// @route   POST api/v1/auth/resetpassword/:resettoken
+// @route   POST /api/v1/auth/resetpassword/:resettoken
 // @access  Public
 exports.resetPassword = asyncHandler(async (req, res, next) => {
   const { oldPassword, newPassword } = req.body;
