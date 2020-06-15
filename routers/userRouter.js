@@ -1,5 +1,7 @@
 const express = require("express");
 const { protect, authorize } = require("../middlewares/auth");
+const filterSortSelectPage = require("../middlewares/filterSortSelectPage");
+const User = require("../model/User");
 
 const router = express.Router();
 
@@ -14,7 +16,7 @@ const {
 router.use(protect);
 router.use(authorize("admin"));
 
-router.route("/").get(getUsers).post(addUser);
+router.route("/").get(filterSortSelectPage(User), getUsers).post(addUser);
 router.route("/:id").get(getUser).put(updateUser).delete(deleteUser);
 
 module.exports = router;

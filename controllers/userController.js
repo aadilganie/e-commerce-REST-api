@@ -7,7 +7,7 @@ const User = require("../model/User");
 // @access  Private
 exports.getUsers = asyncHandler(async (req, res, next) => {
   const users = await User.find();
-  res.status(200).json({ success: true, count: users.length, data: users });
+  res.status(200).json(res.queryResults);
 });
 
 // @desc    Get user by id
