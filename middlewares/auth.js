@@ -7,11 +7,19 @@ const asyncHandler = require("./asyncHander");
 exports.protect = asyncHandler(async (req, res, next) => {
   let token = req.headers.authorization;
 
-  // Test for no token, Test for non Bearer token
-  if (!token || !token.startsWith("Bearer")) {
-    return next(new ErrorResponse(`Not authorized to access this route`, 400));
-  } else {
-    token = token.split(" ")[1];
+  console.log(req.cookies["TOKEN"]);
+
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
+    token = req.headers.authorization.split(" ")[1];
+  } else if (req.cookies["TOKEN"]) {
+    token = req.cookies["TOKEN"];
+  }
+
+  if (!token) {
+    return next(new ErrorResponse(`Not authorized to access this route`, 401));
   }
 
   try {
@@ -20,14 +28,14 @@ exports.protect = asyncHandler(async (req, res, next) => {
     req.user = await User.findById(userId);
     next();
   } catch (error) {
-    next(new ErrorResponse(`Not authorized to access this route`, 400));
+    next(new ErrorResponse(`Not authorized to access this route`, 401));
   }
 });
 
 // Grants access to only certain roles
 exports.authorize = (...roles) => (req, res, next) => {
   if (!roles.includes(req.user.role)) {
-    return next(new ErrorResponse(`Not authorized to access this route`, 400));
+    return next(new ErrorResponse(`Not authorized to access this route`, 401));
   }
   next();
 };

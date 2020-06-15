@@ -35,7 +35,6 @@ const ShopSchema = new mongoose.Schema(
         "Please provide a valid email address",
       ],
     },
-    avergaeShopStar: Number,
     averagePrice: Number,
     photo: String,
     badges: {
