@@ -43,6 +43,7 @@ const UserSchema = new mongoose.Schema({
 UserSchema.methods.genResetToken = function () {
   const plain = crypto.randomBytes(20).toString("hex");
   const hashed = crypto.createHash("sha256").update(plain).digest("hex");
+
   this.passwordResetToken = hashed;
   this.passwordResetExpires = new Date(Date.now() + 10 * 60 * 1000);
   return plain;
@@ -50,6 +51,10 @@ UserSchema.methods.genResetToken = function () {
 
 // Hash user password before saving
 UserSchema.pre("save", async function (next) {
+  if (!this.modifiedPaths().includes("password")) {
+    next();
+  }
+
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
   next();

@@ -2,6 +2,7 @@ const asyncHandler = require("../middlewares/asyncHander");
 const ErrorResponse = require("../utils/ErrorResponse");
 const User = require("../model/User");
 const sendEmail = require("../utils/sendEmail");
+const crypto = require("crypto");
 
 // @desc    Register user
 // @route   POST /api/v1/auth/register
@@ -73,6 +74,10 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse(`No user with email ${email}`, 404));
   }
 
+  // Generate a reset token
+  const resetToken = user.genResetToken();
+  await user.save();
+
   // Send email
   await sendEmail(
     `"Admin" <no-reply@ecommerce.com>`,
@@ -80,11 +85,59 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
     `Password reset token`,
     `You have requested for a password reset, please make a PUT request with your oldPassword and newPassword to ${
       req.protocol
-    }://${req.get("host")}/api/auth/passwordreset/${user._id}.`
+    }://${req.get("host")}/api/v1/auth/passwordreset/${resetToken}`
   );
 
-  // Generate a reset token
-  const resetToken = user.genResetToken();
-
   res.status(200).json({ success: true, resetToken });
+});
+
+// @desc    Reset password
+// @route   POST api/v1/auth/resetpassword/:resettoken
+// @access  Public
+exports.resetPassword = asyncHandler(async (req, res, next) => {
+  const { oldPassword, newPassword } = req.body;
+
+  // Test input
+  if (!oldPassword || !newPassword) {
+    return next(
+      new ErrorResponse(`oldPassword and newPassword are required.`, 400)
+    );
+  }
+
+  const hashedToken = crypto
+    .createHash("sha256")
+    .update(req.params.resettoken)
+    .digest("hex");
+
+  const user = await User.findOne({ passwordResetToken: hashedToken }).select(
+    "+password"
+  );
+
+  // Test if user exists
+  if (!user) {
+    return next(new ErrorResponse(`Invalid reset token`, 400));
+  }
+
+  // Test if token expired
+  if (Date.now() > user.passwordResetExpires) {
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+    await user.save();
+    return next(
+      new ErrorResponse(`Reset token expired, please request a new one`, 400)
+    );
+  }
+
+  // Test if passwords match
+  if (!(await user.verifyPassword(oldPassword))) {
+    return next(new ErrorResponse(`Invalid credentials`, 401));
+  }
+
+  // Perform update
+  user.password = newPassword;
+  user.passwordResetToken = undefined;
+  user.passwordResetExpires = undefined;
+  await user.save();
+
+  respTokenWithCookie(user, 200, res);
 });
