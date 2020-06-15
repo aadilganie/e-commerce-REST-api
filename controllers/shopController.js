@@ -50,6 +50,15 @@ exports.updateShop = asyncHandler(async (req, res, next) => {
     );
   }
 
+  if (shop.user.toString() !== req.user.id) {
+    return next(
+      new ErrorResponse(
+        `User ${req.params.id} not authorized to update shop ${shop._id}`,
+        401
+      )
+    );
+  }
+
   shop = await Shop.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
@@ -70,6 +79,15 @@ exports.deleteShop = asyncHandler(async (req, res, next) => {
     );
   }
 
+  if (shop.user.toString() !== req.user.id) {
+    return next(
+      new ErrorResponse(
+        `User ${req.params.id} not authorized to delete shop ${shop._id}`,
+        401
+      )
+    );
+  }
+
   await shop.remove();
   res.status(200).json({ success: true, data: {} });
 });
@@ -84,6 +102,15 @@ exports.uploadPhoto = asyncHandler(async (req, res, next) => {
   if (!shop) {
     return next(
       new ErrorResponse(`No such shop with id ${req.params.id}`, 404)
+    );
+  }
+
+  if (shop.user.toString() !== req.user.id) {
+    return next(
+      new ErrorResponse(
+        `User ${req.params.id} not authorized to update shop ${shop._id}`,
+        401
+      )
     );
   }
 

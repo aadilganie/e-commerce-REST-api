@@ -38,6 +38,15 @@ exports.addShopItems = asyncHandler(async (req, res, next) => {
     );
   }
 
+  if (shop.user.toString !== req.user.id) {
+    return next(
+      new ErrorResponse(
+        `User ${req.user.id} is not authorized to add items to shop ${shop._id}`,
+        401
+      )
+    );
+  }
+
   req.body.shop = req.params.shopId;
   const shopItem = await ShopItem.create(req.body);
   res.status(200).json({ success: true, data: shopItem });
@@ -49,11 +58,26 @@ exports.addShopItems = asyncHandler(async (req, res, next) => {
 exports.updateShopItem = asyncHandler(async (req, res, next) => {
   let shopItem = await ShopItem.findById(req.params.id);
 
+  console.log(req.user.id);
+  console.log(shopItem.user.toString());
+
   if (!shopItem) {
     return next(
       new ErrorResponse(`No such shop item with id ${req.params.id}`, 404)
     );
   }
+
+  if (shopItem.user.toString() !== req.user.id) {
+    return next(
+      new ErrorResponse(
+        `User ${req.user.id} is not authorized to update item ${shopItem._id}`,
+        401
+      )
+    );
+  }
+
+  console.log(req.user.id);
+  console.log(shopItem.user.toString());
 
   shopItem = await ShopItem.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
@@ -72,6 +96,15 @@ exports.deleteShopItems = asyncHandler(async (req, res, next) => {
   if (!shopItem) {
     return next(
       new ErrorResponse(`No such shop item with id ${req.params.id}`, 404)
+    );
+  }
+
+  if (shopItem.user.toString() !== req.user.id) {
+    return next(
+      new ErrorResponse(
+        `User ${req.user.id} is not authorized to delete item ${shopItem._id}`,
+        401
+      )
     );
   }
 
