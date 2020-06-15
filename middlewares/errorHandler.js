@@ -4,7 +4,7 @@ const errorHandler = (err, req, res, next) => {
   let error = { ...err };
   error.message = err.message;
 
-  console.log(error);
+  console.error(error);
 
   // Object id cast error
   if (error.kind === "ObjectId") {
@@ -13,10 +13,7 @@ const errorHandler = (err, req, res, next) => {
 
   // Duplicate key error
   if (error.code === 11000) {
-    error = new ErrorResponse(
-      `Shop name ${error.keyValue.name} already exists`,
-      404
-    );
+    error = new ErrorResponse(`Duplicate key error`, 400);
   }
 
   // Validator errors
