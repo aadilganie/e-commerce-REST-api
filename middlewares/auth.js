@@ -7,8 +7,6 @@ const asyncHandler = require("./asyncHander");
 exports.protect = asyncHandler(async (req, res, next) => {
   let token = req.headers.authorization;
 
-  console.log(req.cookies["TOKEN"]);
-
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")

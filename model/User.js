@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const Shop = require("./Shop");
+const geocoder = require("../utils/geocode");
 
 const UserSchema = new mongoose.Schema(
   {
@@ -32,6 +33,24 @@ const UserSchema = new mongoose.Schema(
       required: true,
       minlength: [6, "Password must be at least characters"],
       select: false,
+    },
+    address: String,
+    location: {
+      // Geojson
+      type: {
+        type: String, // Don't do `{ location: { type: String } }`
+        enum: ["Point"], // 'location.type' must be 'Point'
+      },
+      coordinates: {
+        type: [Number],
+        index: "2dsphere",
+      },
+      formattedAddress: String,
+      street: String,
+      city: String,
+      state: String,
+      zipcode: String,
+      country: String,
     },
     passwordResetToken: String,
     passwordResetExpires: String,
@@ -74,9 +93,27 @@ UserSchema.pre("save", async function (next) {
   if (!this.modifiedPaths().includes("password")) {
     next();
   }
-
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
+
+// Geocode to create location fields
+UserSchema.pre("save", async function (next) {
+  if (this.modifiedPaths().includes("address")) {
+    console.log(this);
+    const res = await geocoder.geocode(this.address);
+    this.location = {
+      type: "Point",
+      coordinates: [res[0].longitude, res[0].latitude],
+      formattedAddress: res[0].formatedAddress,
+      street: res[0].streetName,
+      city: res[0].city,
+      state: res[0].stateCode,
+      zipcode: res[0].zipcode,
+      country: res[0].countryCode,
+    };
+  }
   next();
 });
 

@@ -4,6 +4,7 @@
     "name": "test buyer 1",
     "email": "testbuyeremail1@email.com",
     "role": "buyer",
+    "address": "9300 Roosevelt Way NE, Seattle, WA, 98115",
     "password": "123456"
   },
   {
@@ -11,6 +12,7 @@
     "name": "test buyer 2",
     "email": "testbuyeremail2@email.com",
     "role": "buyer",
+    "address": "9300 Roosevelt Way NE, Seattle, WA, 98115",
     "password": "123456"
   },
   {
@@ -18,6 +20,7 @@
     "name": "test buyer 3",
     "email": "testbuyeremail3@email.com",
     "role": "buyer",
+    "address": "9300 Roosevelt Way NE, Seattle, WA, 98115",
     "password": "123456"
   },
   {
@@ -25,6 +28,7 @@
     "name": "test buyer 4",
     "email": "testbuyeremail4@email.com",
     "role": "buyer",
+    "address": "9300 Roosevelt Way NE, Seattle, WA, 98115",
     "password": "123456"
   },
   {
@@ -32,6 +36,7 @@
     "name": "test buyer 5",
     "email": "testubuyermail5@email.com",
     "role": "buyer",
+    "address": "9300 Roosevelt Way NE, Seattle, WA, 98115",
     "password": "123456"
   },
   {
@@ -39,6 +44,7 @@
     "name": "test seller name 1",
     "email": "testselleremail1@email.com",
     "role": "seller",
+    "address": "9300 Roosevelt Way NE, Seattle, WA, 98115",
     "password": "123456"
   },
   {
@@ -46,6 +52,7 @@
     "name": "test seller name 2",
     "email": "testselleremail2@email.com",
     "role": "seller",
+    "address": "9300 Roosevelt Way NE, Seattle, WA, 98115",
     "password": "123456"
   },
   {
@@ -53,6 +60,7 @@
     "name": "test seller name 3",
     "email": "testselleremail3@email.com",
     "role": "seller",
+    "address": "9300 Roosevelt Way NE, Seattle, WA, 98115",
     "password": "123456"
   },
   {
@@ -60,6 +68,7 @@
     "name": "test seller name 4",
     "email": "testselleremail4@email.com",
     "role": "seller",
+    "address": "9300 Roosevelt Way NE, Seattle, WA, 98115",
     "password": "123456"
   },
   {
@@ -67,6 +76,7 @@
     "name": "test seller name 5",
     "email": "testselleremail5@email.com",
     "role": "seller",
+    "address": "9300 Roosevelt Way NE, Seattle, WA, 98115",
     "password": "123456"
   }
 ]

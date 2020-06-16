@@ -1,11 +1,11 @@
 require("dotenv").config({ path: "./config/config.env" });
 const express = require("express");
 const morgan = require("morgan");
-const errorHandler = require("./middlewares/errorHandler");
-const connectDB = require("./config/db");
 const fileUpload = require("express-fileupload");
 const path = require("path");
 const cookieParser = require("cookie-parser");
+const errorHandler = require("./middlewares/errorHandler");
+const connectDB = require("./config/db");
 
 const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require("helmet");
