@@ -21,6 +21,7 @@ const ShopItemSchema = new mongoose.Schema({
     required: true,
   },
   averageItemStar: Number,
+  photo: String,
   qtySold: {
     type: Number,
     validate: function (v) {
@@ -41,6 +42,7 @@ const ShopItemSchema = new mongoose.Schema({
   },
 });
 
+// Calculate average prices across all items of a shop
 ShopItemSchema.statics.getAvgPrice = async function (shopId) {
   const result = await this.aggregate([
     { $match: { shop: shopId } },

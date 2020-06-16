@@ -42,9 +42,13 @@ ReviewSchema.statics.getAvgStar = async function (shopItemId) {
   ]);
 
   try {
-    const shopItem = await ShopItem.findById(shopItemId);
-    shopItem.averageItemStar = result[0].averageItemStar;
-    await shopItem.save();
+    const shopItem = await ShopItem.findByIdAndUpdate(
+      shopItemId,
+      {
+        averageItemStar: result[0].averageItemStar,
+      },
+      { runValidators: true }
+    );
   } catch (error) {
     console.error(error);
   }

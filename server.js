@@ -20,7 +20,7 @@ app.use(cookieParser());
 if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
 }
-app.use(fileUpload({ limits: { fileSize: 5000000 } }));
+app.use(fileUpload());
 app.use(mongoSanitize()); // Sanitize request
 app.use(helmet()); // Set security headers
 app.use(xss()); // Prevent xss attacks

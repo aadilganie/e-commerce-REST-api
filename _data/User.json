@@ -3,35 +3,35 @@
     "_id": "5ee711f2b64cfcd631a0e683",
     "name": "test buyer 1",
     "email": "testbuyeremail1@email.com",
-    "role": "seller",
+    "role": "buyer",
     "password": "123456"
   },
   {
     "_id": "5ee711f2b64cfcd631a0e684",
     "name": "test buyer 2",
     "email": "testbuyeremail2@email.com",
-    "role": "seller",
+    "role": "buyer",
     "password": "123456"
   },
   {
     "_id": "5ee711f2b64cfcd631a0e685",
     "name": "test buyer 3",
     "email": "testbuyeremail3@email.com",
-    "role": "seller",
+    "role": "buyer",
     "password": "123456"
   },
   {
     "_id": "5ee711f2b64cfcd631a0e686",
     "name": "test buyer 4",
     "email": "testbuyeremail4@email.com",
-    "role": "seller",
+    "role": "buyer",
     "password": "123456"
   },
   {
     "_id": "5ee711f2b64cfcd631a0e687",
     "name": "test buyer 5",
     "email": "testubuyermail5@email.com",
-    "role": "seller",
+    "role": "buyer",
     "password": "123456"
   },
   {

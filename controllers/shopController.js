@@ -114,34 +114,36 @@ exports.uploadPhoto = asyncHandler(async (req, res, next) => {
     );
   }
 
-  // Check if there is a file
-  if (!req.files) {
-    return next(new ErrorResponse(`Please upload a file`, 404));
-  }
-
-  const file = req.files.shop;
-
-  // Check for file type and size
-  if (!file.mimetype.startsWith("image/")) {
-    return next(new ErrorResponse(`Please upload an image file`, 404));
-  }
-  if (file.size > process.env.MAX_FILE_UPLOAD_SIZE) {
+  // Image validation
+  if (
+    !req.files ||
+    !req.files.shop ||
+    !req.files.shop.mimetype.startsWith("image/") ||
+    req.files.shop.size > process.env.MAX_FILE_UPLOAD_SIZE
+  ) {
     return next(
       new ErrorResponse(
-        `File too large, max ${process.env.MAX_FILE_UPLOAD_SIZE}`,
-        404
+        `Please upload a valid image file under the size of ${
+          parseInt(process.env.MAX_FILE_UPLOAD_SIZE) / 1000000
+        } Megabyte`,
+        400
       )
     );
   }
 
-  // Build up file name, location path and saves file
-  const fileName = `photo_${shop._id}${path.parse(file.name).ext}`;
-  file.mv(`${process.env.FILE_UPLOAD_PATH}/${fileName}`, async (err) => {
+  // Build up filename
+  let fileName = `photo_item_${req.params.id}${
+    path.parse(req.files.shop.name).ext
+  }`;
+
+  // Save image
+  req.files.shop.mv(`${process.env.FILE_UPLOAD_PATH}/${fileName}`, (err) => {
     if (err) {
-      console.error(err.message);
-      return next(new ErrorResponse(`Problem uploading the file`, 500));
+      console.error(err);
+      return next(new ErrorResponse(`Problem uploading photo`, 500));
     }
   });
+
   await Shop.findByIdAndUpdate(
     req.params.id,
     { photo: fileName },
