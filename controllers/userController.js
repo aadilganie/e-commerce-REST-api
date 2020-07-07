@@ -51,12 +51,14 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
 // @route   DELETE /api/v1/users/:id
 // @access  Private
 exports.deleteUser = asyncHandler(async (req, res, next) => {
+  console.log("ran");
   const user = await User.findById(req.params.id);
+
   if (!user) {
     return next(
       new ErrorResponse(`No such user with id ${req.params.id}`, 404)
     );
   }
-  await user.remove();
+  await User.findByIdAndDelete(req.params.id);
   res.status(200).json({ success: true, data: {} });
 });

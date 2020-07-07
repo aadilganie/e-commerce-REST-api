@@ -92,10 +92,8 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
   const { oldPassword, newPassword } = req.body;
 
   // Test input
-  if (!oldPassword || !newPassword) {
-    return next(
-      new ErrorResponse(`oldPassword and newPassword are required.`, 400)
-    );
+  if (!newPassword) {
+    return next(new ErrorResponse(`newPassword are required.`, 400));
   }
 
   const hashedToken = crypto
@@ -122,11 +120,6 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
     );
   }
 
-  // Test if passwords match
-  if (!(await user.verifyPassword(oldPassword))) {
-    return next(new ErrorResponse(`Invalid credentials`, 401));
-  }
-
   // Perform update
   user.password = newPassword;
   user.passwordResetToken = undefined;
@@ -145,7 +138,10 @@ exports.updateInfo = asyncHandler(async (req, res, next) => {
     runValidators: true,
   });
 
-  respTokenWithCookie(user, 200, res);
+  res.status(200).json({
+    success: "true",
+    data: { user },
+  });
 });
 
 // @desc    Update logged in user password
